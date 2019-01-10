@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+    <script src="gaelic.js"></script>
+    <script src="login.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+    <script src="geocode.js"></script>
+    <script src="gaelic.css"></script>
+</head>
+
+<body>
+<div id="home" data-role="page">
+    <div data-role="header">
+        <h1>Gaelic<br>Translation<br>Services</h1>
+        <h2 id="user"></h2>
+        <h5 id="postcode"></h5>
+    </div>
+    <div data-role="content">
+        <ul data-role="listview" data-inset="true">
+            <li><a id="translate" href="#translatePage">Singluar Word Translation</a></li>
+            <li><a id="lessons" href="#lessonPage">Lessons</a></li>
+            <li><a id="quiz" href="#quizpage">Quiz</a></li>
+            <li><a id="settings" href="#settingsPage">Settings</a></li>
+        </ul>
+
+        <div id="map-canvas"></div>
+    </div>
+    <div data-role="footer" data-position="fixed" class="ui-bar">
+        <nav>
+            <a href="#loginPage" data-role="button" data-inline="true" data-theme="c">Sign In</a>
+            <a href="#registerPage" data-role="button" data-inline="true" data-theme="c">Register</a>
+        </nav>
+    </div>
+</div>
+
+<div id="translatePage" data-role="page">
+    <div data-role="header">
+        <h1>Singular<br>Word<br>Translation</h1>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+    </div>
+    <div data-role="content">
+        <h2>Please enter a word in English to translate into Gaelic</h2>
+        <label for="singleWord">English Word</label>
+        <input id="singleWord" type="text"/>
+
+        <ul data-role="listview" data-inset="true">
+            <li><a id="translateWord">Translate</a></li>
+        </ul>
+
+        <label for="answer"></label>
+        <input id="answer" type="text"/>
+    </div>
+    <div data-role="footer" data-position="fixed" class="ui-bar">
+        <nav>
+        </nav>
+    </div>
+</div>
+
+<div id="lessonPage" data-role="page">
+    <div data-role="header">
+        <h1>Lesson</h1>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+    </div>
+    <div data-role="content">
+        <h2>Introduce yourself</h2>
+        <table data-role="table" data-mode="columntoggle" border="1" cellpadding="20" class="ui-shadow" id="introducetable">
+            <thead>
+            <tr>
+              <th data-priority="1">Gaelic</th>
+              <th data-priority="2">English</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+                <td>Is mise</td>
+                <td>My name is</td>
+            </tr>
+            <tr>
+                <td>Dè an t-ainm a th'ort?</td>
+                <td>What is you name?</td>
+            </tr>
+            <tr>
+                <td>Ciamar a tha thu?</td>
+                <td>How are you?</td>
+            </tr>
+            <tr>
+                <td>Tha mi a 'tuigsinn</td>
+                <td>I understand</td>
+            </tr>
+            <tr>
+                <td>Chan eil mi a 'tuigsinn</td>
+                <td>I don't understand</td>
+            </tr>
+          </tbody>
+        </table>
+
+    </div>
+    <div data-role="footer" data-position="fixed" class="ui-bar">
+        <nav>
+        </nav>
+    </div>
+</div>
+
+<div id="quizpage" data-role="page">
+    <div data-role="header">
+        <h1>Test Yourself!</h1>
+        <h2 id="currentUser">User</h2>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+    </div>
+    <div data-role="content">
+        <ul id="questions" data-role="listview" data-inset="true" data-theme="a">
+            <!-- Questions go here. -->
+        </ul>
+    </div>
+    <div data-role="footer" data-position="fixed" class="ui-bar">
+        <nav>
+        </nav>
+    </div>
+</div>
+
+<div id="settingsPage" data-role="page">
+    <div data-role="header">
+        <h1>Settings</h1>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+
+    </div>
+    <div data-role="content">
+        <label for="gps">GPS Data</label>
+        <input type="checkbox" data-role="flipswitch" name="switch" id="gps">
+        <label for="offlineData">Offline Data</label>
+        <input type="checkbox" data-role="flipswitch" name="switch" id="offlineData">
+    </div>
+    <div data-role="footer" data-position="fixed" class="ui-bar">
+        <nav>
+          <div data-role="navbar">
+<!--              <a data-role="button" data-inline="true" id="SignIn" href="#logout">Sign in</a>
+              <a data-role="button" data-inline="true" id="Register" href="#logout">Logout</a> -->
+          </div>
+        </nav>
+    </div>
+</div>
+<div id="loginPage" data-role="page">
+    <div data-role="header">
+        <h1>Log-In</h1>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+    </div>
+    <div data-role="content">
+        <label for="useremail">Email:</label>
+        <input type="text" id="useremail" size="30" placeholder="example@email.com"/>
+        <label for="userpassword">Password:</label>
+        <input type="password" id="userpassword" size="20"/>
+        <button data-role="button" id="ok">Log-In</button><button data-role="button" id="cancel">Cancel</button>
+    </div>
+    <div data-role="footer" data-position="fixed" class="ui-bar">
+        <nav>
+        </nav>
+    </div>
+</div>
+<div id="registerPage" data-role="page">
+    <div data-role="header">
+        <h1>Register</h1>
+        <a href="#" data-rel="back" data-icon="back">Back</a>
+    </div>
+    <div data-role="content">
+        <form id="registerForm">
+            <label for="firstname">First Name:</label>
+            <input type="text" id="firstname" size="30" placeholder="Joe"/>
+            <label for="registeremail">Email:</label>
+            <input type="text" id="registeremail" size="30" placeholder="example@email.com"/>
+            <label for="registerpassword">Password:</label>
+            <input type="password" id="registerpassword" size="20"/>
+            <button data-role="button" id="regok">Register</button><button data-role="button" id="regcancel">Cancel</button>
+        </form>
+    </div>
+    <div data-role="footer" data-position="fixed" class="ui-bar">
+        <nav>
+        </nav>
+    </div>
+</div>
+</body>
+</html>
